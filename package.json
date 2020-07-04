@@ -1,0 +1,26 @@
+{
+  "name": "new-episodes-telegram-group",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "start-watch": "nodemon server/server.js",
+    "test": "SET \"PORT=3002\" && SET \"NODE_ENV=testing\" && mocha server/**/*.test.js",
+    "test-watch": "nodemon --exec \"npm test\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rmartide/new-episodes-telegram-group.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "_moduleAliases": {
+    "@models": "server/models",
+    "@mongoose": "server/mongoose",
+    "@seed": "server/seed"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
