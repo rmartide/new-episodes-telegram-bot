@@ -1,1 +1,1 @@
-**New episodes telegram group**
+**New episodes telegram bot**

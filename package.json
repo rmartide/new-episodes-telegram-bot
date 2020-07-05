@@ -1,5 +1,5 @@
 {
-  "name": "new-episodes-telegram-group",
+  "name": "new-episodes-telegram-bot",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rmartide/new-episodes-telegram-group.git"
+    "url": "git+https://github.com/rmartide/new-episodes-telegram-bot.git"
   },
   "author": "",
   "license": "ISC",
