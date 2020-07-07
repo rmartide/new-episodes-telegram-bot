@@ -1,5 +1,14 @@
-name: 'Pumping Iron'
-description: 'Image to use with an nginx'
-runs:
-    using: 'docker'
-    image: 'Dockerfile'
+name: Publish Docker
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Publish to Registry
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: rmartide/new-episodes-telegram-bot/image
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        registry: docker.pkg.github.com
