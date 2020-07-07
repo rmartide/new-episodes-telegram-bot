@@ -9,7 +9,7 @@ jobs:
       uses: elgohr/Publish-Docker-Github-Action@master
       env:
         BOT_API: ${{ secrets.BOT_API }}
-        CHAT_API: ${{ secrets.CHAT_API }}
+        CHAT_API: ${{ secrets.CHAT_ID }}
       with:
         name: rmartide/new-episodes-telegram-bot/image
         username: ${{ github.actor }}
