@@ -1,0 +1,5 @@
+name: 'Pumping Iron'
+description: 'Image to use with an nginx'
+runs:
+    using: 'docker'
+    image: 'Dockerfile'
