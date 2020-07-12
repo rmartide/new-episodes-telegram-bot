@@ -1,22 +1,49 @@
 process.env.NTBA_FIX_319 = 1;
-
+require("./mongoose/connect");
 const TelegramBot = require("node-telegram-bot-api");
 const schedule = require("node-schedule");
 require("dotenv").config();
+const { scrape } = require("../service/scrap");
 
 const botapi = process.env.BOT_API;
 const chatid = process.env.CHAT_ID;
+const url = process.env.URL;
 
 const bot = new TelegramBot(botapi, { polling: true });
 
 const rule = new schedule.RecurrenceRule();
 
+const opts = {
+	parse_mode: "Markdown"
+};
+
 rule.hour = new schedule.Range(16, 22);
 rule.minute = [0, 15, 30, 45];
 
+const Episode = require("./models/Episode");
+
+/* 
 schedule.scheduleJob(rule, () => {
-	bot.sendMessage(
-		chatid,
-		`Yo wadup, it should be between 16:00 and 22:00 and a multiple of 15 minutes ${new Date().getHours()}:${new Date().getMinutes()}`
-	);
+	
+}); */
+
+scrape().then(({ data: { episodes }, response, body }) => {
+	//console.log(`Status Code: ${response.statusCode}`);
+	let once = false;
+	episodes.forEach((episode) => {
+		Episode.alreadyExists(episode).then((exists) => {
+			if (!exists) {
+				Episode.add(episode);
+			}
+			if (!once) {
+				bot.sendMessage(
+					chatid,
+					`*Nuevo episodio:*[ ](${url}${episode.image})
+					[${episode.title} ${episode.number}](${url}${episode.url})`,
+					opts
+				);
+				once = true;
+			}
+		});
+	});
 });
