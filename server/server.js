@@ -22,28 +22,20 @@ rule.minute = [0, 15, 30, 45];
 
 const Episode = require("./models/Episode");
 
-/* 
 schedule.scheduleJob(rule, () => {
-	
-}); */
-
-scrape().then(({ data: { episodes }, response, body }) => {
-	//console.log(`Status Code: ${response.statusCode}`);
-	let once = false;
-	episodes.forEach((episode) => {
-		Episode.alreadyExists(episode).then((exists) => {
-			if (!exists) {
-				Episode.add(episode);
-			}
-			if (!once) {
-				bot.sendMessage(
-					chatid,
-					`*Nuevo episodio:*[ ](${url}${episode.image})
-					[${episode.title} ${episode.number}](${url}${episode.url})`,
-					opts
-				);
-				once = true;
-			}
+	scrape().then(({ data: { episodes } }) => {
+		episodes.forEach((episode) => {
+			Episode.alreadyExists(episode).then((exists) => {
+				if (!exists) {
+					Episode.add(episode);
+					bot.sendMessage(
+						chatid,
+						`*Nuevo episodio:*[ ](${url}${episode.image})
+						[${episode.title} ${episode.number}](${url}${episode.url})`,
+						opts
+					);
+				}
+			});
 		});
 	});
 });
