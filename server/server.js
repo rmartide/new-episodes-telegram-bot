@@ -17,7 +17,7 @@ const opts = {
 	parse_mode: "Markdown"
 };
 
-rule.hour = new schedule.Range(16, 22);
+rule.hour = new schedule.Range(18, 00);
 rule.minute = [0, 15, 30, 45];
 
 const Episode = require("./models/Episode");
