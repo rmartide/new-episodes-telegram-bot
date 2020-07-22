@@ -24,7 +24,7 @@ const Episode = require("./models/Episode");
 
 schedule.scheduleJob(rule, () => {
 	scrape().then(({ data: { episodes } }) => {
-		episodes.forEach((episode) => {
+		episodes.reverse().forEach((episode) => {
 			Episode.alreadyExists(episode).then((exists) => {
 				if (!exists) {
 					Episode.add(episode);
